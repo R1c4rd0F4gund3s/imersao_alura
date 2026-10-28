@@ -109,18 +109,48 @@ sequenceDiagram
 ## 🧪 3. Bateria de Testes
 
 > [!NOTE]
-> Os testes foram executados com o interpretador Python 3.11 isolado no ambiente virtual (`.venv`), cobrindo tanto entradas pelo terminal quanto asserções programáticas.
+> Os testes foram executados com o interpretador Python 3.11 isolado no ambiente virtual (`.venv`), cobrindo testes unitários das funções e uma bateria completa de **testes funcionais ponta a ponta (E2E)** via `subprocess`.
 
-| Operação | Entrada 1 | Entrada 2 | Esperado | Obtido | Status |
-|:---|:---:|:---:|:---:|:---:|:---:|
-| **Soma (+)** | `12,3` | `7,7` | `20,0` | `20,0` | ✅ Aprovado |
-| **Subtração (-)** | `10,0` | `4,5` | `5,5` | `5,5` | ✅ Aprovado |
-| **Multiplicação (*)** | `3,0` | `2,5` | `7,5` | `7,5` | ✅ Aprovado |
-| **Divisão (/)** | `10,0` | `2,0` | `5,0` | `5,0` | ✅ Aprovado |
-| **Divisão por Zero** | `7,0` | `0` | Mensagem de erro amigável | `Erro: Não é possível dividir por zero.` | ✅ Aprovado |
-| **Porcentagem (%)** | `200` | `15` | `15,0% de 200,0 = 30,0` | `15,0% de 200,0 = 30,0` | ✅ Aprovado |
-| **Porcentagem com decimal** | `150,5` | `10` | `10,0% de 150,5 = 15,05` | `10,0% de 150,5 = 15,05` | ✅ Aprovado |
-| **Entrada com milhar** | `1.000,50` | `2` (soma) | `1.002,5` | `1002,5` | ✅ Aprovado |
+### 3.1 Tabela de Casos de Teste Funcionais (E2E)
+
+| # | Cenário Testado | Entrada Simulada | Saída Esperada | Saída Obtida | Status |
+|:---:|:---|:---:|:---|:---|:---:|
+| **1** | Opção inválida no menu | `9` | Retornar mensagem de opção inválida | `Opção inválida! Tente novamente.` | ✅ Aprovado |
+| **2** | Entrada com caractere não numérico | `texto_invalido` | Bloquear entrada e pedir número válido | `Erro: Entrada inválida. Por favor, digite números válidos.` | ✅ Aprovado |
+| **3** | **Soma com decimais (`pt-BR`)** | `12,5` e `7,5` | `Resultado: 12,5 + 7,5 = 20,0` | `Resultado: 12,5 + 7,5 = 20,0` | ✅ Aprovado |
+| **4** | **Subtração com decimais (`pt-BR`)** | `20,0` e `4,8` | `Resultado: 20,0 - 4,8 = 15,2` | `Resultado: 20,0 - 4,8 = 15,2` | ✅ Aprovado |
+| **5** | **Multiplicação com decimais (`pt-BR`)** | `4,5` e `2` | `Resultado: 4,5 * 2,0 = 9,0` | `Resultado: 4,5 * 2,0 = 9,0` | ✅ Aprovado |
+| **6** | **Divisão com inteiros** | `15` e `3` | `Resultado: 15,0 / 3,0 = 5,0` | `Resultado: 15,0 / 3,0 = 5,0` | ✅ Aprovado |
+| **7** | **Divisão por Zero (Resiliência)** | `10` e `0` | Tratar erro sem quebrar o programa | `Erro: Não é possível dividir por zero.` | ✅ Aprovado |
+| **8** | **Porcentagem inteira** | `200` e `15` | `Resultado: 15,0% de 200,0 = 30,0` | `Resultado: 15,0% de 200,0 = 30,0` | ✅ Aprovado |
+| **9** | **Porcentagem com decimal (`pt-BR`)** | `150,5` e `10` | `Resultado: 10,0% de 150,5 = 15,05` | `Resultado: 10,0% de 150,5 = 15,05` | ✅ Aprovado |
+| **10** | **Encerramento limpo** | `6` | Mensagem de despedida e `exit code 0` | `Encerrando a calculadora. Até mais!` | ✅ Aprovado |
+
+---
+
+### 3.2 Log Real da Execução Automatizada
+
+<details>
+<summary><b>▶️ Clique para expandir o log da execução funcional</b></summary>
+
+```console
+=== CÓDIGO DE RETORNO ===
+0
+
+=== SAÍDA DA EXECUÇÃO (Trechos Principais) ===
+ -> Escolha uma opção (1-6): Opção inválida! Tente novamente.
+ -> Escolha uma opção (1-6): Digite o primeiro número: Erro: Entrada inválida. Por favor, digite números válidos (ex: 10 ou 10,5).
+ ->  Resultado: 12,5 + 7,5 = 20,0
+ ->  Resultado: 20,0 - 4,8 = 15,2
+ ->  Resultado: 4,5 * 2,0 = 9,0
+ ->  Resultado: 15,0 / 3,0 = 5,0
+ -> Erro: Não é possível dividir por zero.
+ ->  Resultado: 15,0% de 200,0 = 30,0
+ ->  Resultado: 10,0% de 150,5 = 15,05
+ -> Escolha uma opção (1-6): Encerrando a calculadora. Até mais!
+```
+
+</details>
 
 ---
 

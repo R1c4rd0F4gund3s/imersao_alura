@@ -3,8 +3,9 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:4285F4,50:34A853,100:0070f3&height=200&section=header&text=Imers%C3%A3o%20IA%20%E2%80%94%20Alura&fontSize=48&fontColor=ffffff&fontAlignY=35&desc=Construindo%20software%20com%20as%20IAs%20do%20Google&descAlignY=55&descSize=18" alt="Imersão IA — Alura" width="100%"/>
 
 ![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Google Gemini](https://img.shields.io/badge/Google%20Gemini-Pair%20Programming-4285F4?style=for-the-badge&logo=googlegemini&logoColor=white)
 ![Google AI Studio](https://img.shields.io/badge/Google%20AI%20Studio-Prototipação-4285F4?style=for-the-badge&logo=google&logoColor=white)
-![Google Antigravity](https://img.shields.io/badge/Google%20Antigravity-Pair%20Programming-34A853?style=for-the-badge&logo=google&logoColor=white)
+![Google Antigravity](https://img.shields.io/badge/Google%20Antigravity-Ambiente%20Agêntico-34A853?style=for-the-badge&logo=google&logoColor=white)
 ![Alura](https://img.shields.io/badge/Imersão-Alura-0070f3?style=for-the-badge)
 
 **[🎯 Desafios](#-trilha-de-desafios) · [🔄 Jornada](#-a-jornada-do-código) · [🖥️ Demonstração](#%EF%B8%8F-demonstração) · [🛠️ Como rodar](#%EF%B8%8F-pré-requisitos-e-execução)**
@@ -15,9 +16,9 @@
 
 ## 📖 Sobre
 
-Repositório dedicado ao acompanhamento prático dos desafios da **Imersão IA da Alura**, explorando as ferramentas do ecossistema do Google: **Google AI Studio** e **Google Antigravity**.
+Repositório dedicado ao acompanhamento prático dos desafios da **Imersão IA da Alura**, explorando as ferramentas e modelos do ecossistema do Google: **Google Gemini** em Pair Programming, **Google AI Studio** e **Google Antigravity**.
 
-O projeto central é uma aplicação de calculadora em Python, desenvolvida iterativamente com o auxílio de inteligência artificial: gerada no AI Studio e evoluída/refatorada via Antigravity.
+O projeto central é uma aplicação de calculadora em Python desenvolvida iterativamente com inteligência artificial: gerada no AI Studio, evoluída com suporte a `pt-BR` e porcentagem via Google Antigravity e assistida em Pair Programming pelo Google Gemini.
 
 > [!NOTE]
 > O código é escrito pelas IAs. O que é meu está em [`anotacoes/`](anotacoes/): os prompts usados, as perguntas respondidas e o que aprendi em cada etapa.
@@ -32,9 +33,9 @@ flowchart TB
         direction LR
         A["💬 Prompt"] --> B["✨ AI Studio<br/>gera o código"] --> C["🧮 4 operações<br/>+ − × ÷"]
     end
-    subgraph D2["Dia 2 · Google Antigravity"]
+    subgraph D2["Dia 2 · Antigravity & Gemini"]
         direction LR
-        D["🛸 Explora<br/>o projeto"] --> E["➕ Porcentagem"] --> F["✅ Testes"]
+        D["🛸 Explora<br/>o projeto"] --> E["➕ Porcentagem<br/>& pt-BR"] --> F["✅ Testes E2E"]
     end
     subgraph D3["Dia 3"]
         G["🚀 Próximo desafio"]
@@ -56,7 +57,7 @@ flowchart TB
 | Dia | Tema | Ferramenta | Anotações | Status |
 |:---:|:---|:---:|:---:|:---:|
 | **1** | Criando sua primeira aplicação com IA | ✨ Google AI Studio | [dia1.md](anotacoes/dia1.md) | ✅ Concluído |
-| **2** | Evoluindo a aplicação e adicionando features | 🛸 Google Antigravity | [dia2.md](anotacoes/dia2.md) | ✅ Concluído |
+| **2** | Evoluindo a aplicação e adicionando features | 🛸 Google Antigravity / ♊ Gemini | [dia2.md](anotacoes/dia2.md) | ✅ Concluído |
 | **3** | Desafio 3 | — | [dia3.md](anotacoes/dia3.md) | ⏳ A iniciar |
 
 ---
@@ -73,13 +74,14 @@ $ python calculadora/calculadora-python.py
 2. Subtração (-)
 3. Multiplicação (*)
 4. Divisão (/)
-5. Sair
+5. Porcentagem (%)
+6. Sair
 =========================
-Escolha uma opção (1-5): 1
-Digite o primeiro número: 12
-Digite o segundo número: 30
+Escolha uma opção (1-6): 1
+Digite o primeiro número: 12,5
+Digite o segundo número: 29,5
 
- Resultado: 12.0 + 30.0 = 42.0
+ Resultado: 12,5 + 29,5 = 42,0
 ```
 
 <details>
@@ -157,6 +159,7 @@ python calculadora/calculadora-python.py
 
 | | Ferramenta | Papel no projeto |
 |:---:|:---|:---|
+| ♊ | **[Google Gemini](https://gemini.google.com/)** | Pair Programming inteligente para assistência em código, refatoração, testes e regras de negócio. |
 | ✨ | **[Google AI Studio](https://aistudio.google.com/)** | Prototipação rápida, experimentação de prompts e geração inicial da lógica de software. |
 | 🛸 | **Google Antigravity** | IDE agêntica de desenvolvimento assistido por IA para exploração de contexto, refatoração, testes e evolução contínua da base de código. |
 
