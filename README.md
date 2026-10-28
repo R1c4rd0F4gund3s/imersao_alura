@@ -27,13 +27,19 @@ O projeto central é uma aplicação de calculadora em Python, desenvolvida iter
 ## 🔄 A jornada do código
 
 ```mermaid
-flowchart LR
-    A["💬 Prompt<br/>em linguagem natural"] --> B["✨ Google AI Studio<br/>gera a calculadora"]
-    B --> C["🧮 4 operações<br/>+ − × ÷"]
-    C --> D["🛸 Google Antigravity<br/>explora e modifica"]
-    D --> E["➕ Porcentagem<br/>nova funcionalidade"]
-    E --> F["✅ Testes<br/>nada quebrou"]
-    F --> G["🚀 Dia 3"]
+flowchart TB
+    subgraph D1["Dia 1 · Google AI Studio"]
+        direction LR
+        A["💬 Prompt"] --> B["✨ AI Studio<br/>gera o código"] --> C["🧮 4 operações<br/>+ − × ÷"]
+    end
+    subgraph D2["Dia 2 · Google Antigravity"]
+        direction LR
+        D["🛸 Explora<br/>o projeto"] --> E["➕ Porcentagem"] --> F["✅ Testes"]
+    end
+    subgraph D3["Dia 3"]
+        G["🚀 Próximo desafio"]
+    end
+    D1 --> D2 --> D3
 
     classDef studio fill:#4285F4,stroke:#1a5fd0,color:#fff
     classDef anti fill:#34A853,stroke:#1e7e34,color:#fff
