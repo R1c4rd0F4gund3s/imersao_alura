@@ -55,8 +55,8 @@ flowchart TB
 
 | Dia | Tema | Ferramenta | Anotações | Status |
 |:---:|:---|:---:|:---:|:---:|
-| **1** | Criando sua primeira aplicação com IA | ✨ Google AI Studio | [dia1.md](anotacoes/dia1.md) | 🔄 Em andamento |
-| **2** | Evoluindo a aplicação e adicionando features | 🛸 Google Antigravity | [dia2.md](anotacoes/dia2.md) | ⏳ A iniciar |
+| **1** | Criando sua primeira aplicação com IA | ✨ Google AI Studio | [dia1.md](anotacoes/dia1.md) | ✅ Concluído |
+| **2** | Evoluindo a aplicação e adicionando features | 🛸 Google Antigravity | [dia2.md](anotacoes/dia2.md) | ✅ Concluído |
 | **3** | Desafio 3 | — | [dia3.md](anotacoes/dia3.md) | ⏳ A iniciar |
 
 ---
