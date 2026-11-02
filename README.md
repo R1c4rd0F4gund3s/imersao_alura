@@ -18,7 +18,9 @@
 
 Repositório dedicado ao acompanhamento prático dos desafios da **Imersão IA da Alura**, explorando as ferramentas e modelos do ecossistema do Google: **Google Gemini** em Pair Programming, **Google AI Studio** e **Google Antigravity**.
 
-O projeto central é uma aplicação de calculadora em Python desenvolvida iterativamente com inteligência artificial: gerada no AI Studio, evoluída com suporte a `pt-BR` e porcentagem via Google Antigravity e assistida em Pair Programming pelo Google Gemini.
+Os projetos desenvolvidos ao longo da imersão são:
+1. **Calculadora em Python (`calculadora/`):** Gerada no AI Studio e evoluída com suporte a `pt-BR` e porcentagem via Google Antigravity.
+2. **Lista de Tarefas Visual (`lista_tarefas/`):** Aplicação Web (HTML + CSS + JS) construída no Google Antigravity para adicionar, concluir (com diferenciação visual) e remover atividades, acompanhada de testes automatizados.
 
 > [!NOTE]
 > O código é escrito pelas IAs. O que é meu está em [`anotacoes/`](anotacoes/): os prompts usados, as perguntas respondidas e o que aprendi em cada etapa.
@@ -37,8 +39,9 @@ flowchart TB
         direction LR
         D["🛸 Explora<br/>o projeto"] --> E["➕ Porcentagem<br/>& pt-BR"] --> F["✅ Testes E2E"]
     end
-    subgraph D3["Dia 3"]
-        G["🚀 Próximo desafio"]
+    subgraph D3["Dia 3 · Google Antigravity"]
+        direction LR
+        G["📋 Lista de Tarefas<br/>Interface Visual"] --> H["🎨 Destaque Visual<br/>Concluídas vs Pendentes"] --> I["🧪 Testes<br/>Automatizados"]
     end
     D1 --> D2 --> D3
 
@@ -47,7 +50,7 @@ flowchart TB
     classDef next fill:#0070f3,stroke:#0050b3,color:#fff
     class A,B,C studio
     class D,E,F anti
-    class G next
+    class G,H,I next
 ```
 
 ---
@@ -58,7 +61,7 @@ flowchart TB
 |:---:|:---|:---:|:---:|:---:|
 | **1** | Criando sua primeira aplicação com IA | ✨ Google AI Studio | [dia1.md](anotacoes/dia1.md) | ✅ Concluído |
 | **2** | Evoluindo a aplicação e adicionando features | 🛸 Google Antigravity / ♊ Gemini | [dia2.md](anotacoes/dia2.md) | ✅ Concluído |
-| **3** | Desafio 3 | — | [dia3.md](anotacoes/dia3.md) | ⏳ A iniciar |
+| **3** | Criando uma lista de tarefas com interface visual | 🛸 Google Antigravity | [dia3.md](anotacoes/dia3.md) | ✅ Concluído |
 
 ---
 
@@ -107,11 +110,16 @@ A calculadora não quebra: a função `dividir` lança o erro e o laço principa
 
 ```text
 imersao_alura/
-├── 🧮 calculadora/         # Código-fonte da aplicação (Python)
+├── 🧮 calculadora/         # Código-fonte da calculadora em CLI (Python - Dias 1 e 2)
+├── 📋 lista_tarefas/       # Aplicação visual To-Do List (HTML/CSS/JS + Testes - Dia 3)
+│   ├── index.html          # Estrutura visual da página
+│   ├── style.css           # Estilos e diferenciação de tarefas concluídas
+│   ├── app.js              # Lógica de adicionar, concluir e remover tarefas
+│   └── app.test.js         # Testes automatizados da aplicação
 ├── 📝 anotacoes/           # Registros dos desafios, prompts e aprendizados
 │   ├── dia1.md             # Desafio 1: Prototipação com Google AI Studio
 │   ├── dia2.md             # Desafio 2: Evolução no Google Antigravity
-│   └── dia3.md             # Desafio 3: Próximos passos
+│   └── dia3.md             # Desafio 3: Lista de Tarefas no Google Antigravity
 ├── 🐍 .python-version      # Definição de versão do Python
 └── 📖 README.md            # Documentação principal
 ```
@@ -147,10 +155,29 @@ py -3.11 -m venv .venv
 </tr>
 </table>
 
-**2. Executar a aplicação**
+**2. Executar a calculadora (Dias 1 e 2)**
 
 ```bash
 python calculadora/calculadora-python.py
+```
+
+**3. Executar e testar a Lista de Tarefas Visual (Dia 3)**
+
+Para abrir a interface visual no navegador (ou via servidor local simples):
+
+```bash
+# Opção A: Abrir o arquivo diretamente no navegador
+xdg-open lista_tarefas/index.html
+
+# Opção B: Subir um servidor HTTP local com Python
+python -m http.server 8000 --directory lista_tarefas
+# Acesse http://localhost:8000 no navegador
+```
+
+Para executar a suíte de testes automatizados da Lista de Tarefas:
+
+```bash
+node --test lista_tarefas/app.test.js
 ```
 
 ---

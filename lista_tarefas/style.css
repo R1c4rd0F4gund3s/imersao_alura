@@ -1,0 +1,427 @@
+/* ==========================================================================
+   ESTILOS DA LISTA DE TAREFAS (Desafio 3 - Imersão IA Alura)
+   Organizado em:
+   1. Variáveis Globais e Reset
+   2. Layout Principal e Cabeçalho
+   3. Painel de Resumo (Contadores)
+   4. Formulário de Adição e Filtros
+   5. Lista de Tarefas e Diferenciação Visual (Pendentes vs Concluídas)
+   ========================================================================== */
+
+/* 1. Variáveis Globais e Ícones SVG Reutilizáveis */
+:root {
+  --cor-primaria: #4285f4;
+  --cor-primaria-hover: #1a73e8;
+  --cor-sucesso: #34a853;
+  --cor-sucesso-fundo: #f0fdf4;
+  --cor-pendente: #d97706;
+  --cor-pendente-fundo: #fffbeb;
+  --cor-perigo: #ef4444;
+  --cor-perigo-hover: #dc2626;
+  --cor-fundo-pagina: #f8fafc;
+  --cor-card: #ffffff;
+  --cor-texto: #1e293b;
+  --cor-texto-suave: #64748b;
+  --cor-borda: #e2e8f0;
+  --sombra-card: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 4px 10px -2px rgba(15, 23, 42, 0.04);
+  --raio-borda: 12px;
+
+  /* Ícone de check para checkbox customizado (Modern Web Guidance) */
+  --icon-check: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'></polyline></svg>");
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(135deg, #eef2ff 0%, #f0fdf4 100%);
+  color: var(--cor-texto);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2.5rem 1rem;
+  line-height: 1.5;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* 2. Layout Principal e Cabeçalho */
+.app-container {
+  width: 100%;
+  max-width: 640px;
+  background-color: var(--cor-card);
+  border-radius: 16px;
+  box-shadow: var(--sombra-card);
+  padding: 2rem;
+  border: 1px solid var(--cor-borda);
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.badge-desafio {
+  display: inline-block;
+  background-color: #e8f0fe;
+  color: var(--cor-primaria-hover);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.app-header h1 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--cor-texto);
+  margin-bottom: 0.35rem;
+}
+
+.subtitulo {
+  color: var(--cor-texto-suave);
+  font-size: 0.95rem;
+}
+
+/* 3. Painel de Resumo (Contadores) */
+.painel-resumo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.card-resumo {
+  background-color: var(--cor-fundo-pagina);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-borda);
+  padding: 0.85rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.card-pendentes {
+  background-color: var(--cor-pendente-fundo);
+  border-color: #fde68a;
+}
+
+.card-concluidas {
+  background-color: var(--cor-sucesso-fundo);
+  border-color: #bbf7d0;
+}
+
+.resumo-numero {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.resumo-rotulo {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--cor-texto-suave);
+}
+
+/* 4. Formulário de Adição e Filtros */
+.secao-formulario {
+  margin-bottom: 1.25rem;
+}
+
+.grupo-input {
+  display: flex;
+  gap: 0.65rem;
+}
+
+#input-tarefa {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px solid var(--cor-borda);
+  border-radius: var(--raio-borda);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#input-tarefa:focus {
+  border-color: var(--cor-primaria);
+  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.18);
+}
+
+.btn-primario {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: var(--cor-primaria);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--raio-borda);
+  padding: 0.75rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  white-space: nowrap;
+}
+
+.icone-mais {
+  font-size: 1.2rem;
+  line-height: 1;
+  font-weight: 800;
+}
+
+.btn-primario:hover {
+  background-color: var(--cor-primaria-hover);
+}
+
+.btn-primario:active {
+  transform: scale(0.98);
+}
+
+.btn-primario:focus-visible {
+  outline: 2px solid var(--cor-primaria-hover);
+  outline-offset: 2px;
+}
+
+.mensagem-erro {
+  color: var(--cor-perigo);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.barra-filtros {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--cor-borda);
+  padding-bottom: 0.85rem;
+}
+
+.btn-filtro {
+  background: transparent;
+  border: 1px solid var(--cor-borda);
+  color: var(--cor-texto-suave);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-filtro:hover {
+  border-color: var(--cor-primaria);
+  color: var(--cor-primaria);
+}
+
+.btn-filtro.ativo {
+  background-color: var(--cor-primaria);
+  border-color: var(--cor-primaria);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   5. LISTA DE TAREFAS E DIFERENCIAÇÃO VISUAL (PENDENTES VS CONCLUÍDAS)
+   Implementa a melhoria solicitada no Desafio 3 usando variáveis CSS + :has()
+   ========================================================================== */
+.lista-tarefas {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Estado Padrão: Tarefa Pendente */
+.tarefa-item {
+  --item-bg: #ffffff;
+  --item-text: #1e293b;
+  --item-border: #e2e8f0;
+  --item-borda-lateral: #4285f4;
+  --item-decoracao: none;
+  --item-opacidade: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  background-color: var(--item-bg);
+  color: var(--item-text);
+  border: 1px solid var(--item-border);
+  border-left: 5px solid var(--item-borda-lateral);
+  border-radius: var(--raio-borda);
+  opacity: var(--item-opacidade);
+  transition: background-color 0.25s ease, border-color 0.25s ease, opacity 0.25s ease, transform 0.15s ease;
+}
+
+.tarefa-item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+}
+
+/* MELHORIA VISUAL: Estado de Tarefa Concluída via seletor moderno :has() */
+.tarefa-item:has(.tarefa-checkbox:checked) {
+  --item-bg: #f0fdf4;
+  --item-text: #64748b;
+  --item-border: #bbf7d0;
+  --item-borda-lateral: #34a853;
+  --item-decoracao: line-through;
+  --item-opacidade: 0.88;
+}
+
+/* Fallback para navegadores antigos sem suporte a :has() */
+@supports not selector(:has(*)) {
+  .tarefa-item.concluida {
+    --item-bg: #f0fdf4;
+    --item-text: #64748b;
+    --item-border: #bbf7d0;
+    --item-borda-lateral: #34a853;
+    --item-decoracao: line-through;
+    --item-opacidade: 0.88;
+  }
+}
+
+/* Rótulo acessível com área de toque mínima de 44px */
+.tarefa-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-block-size: 44px;
+  cursor: pointer;
+  flex: 1;
+  user-select: none;
+}
+
+/* Checkbox Customizado (Modern Web Guidance) */
+.tarefa-checkbox {
+  --checkbox-size: 1.35em;
+  --checkbox-icon-size: 0.8em;
+
+  appearance: none;
+  display: inline-grid;
+  place-content: center;
+  inline-size: var(--checkbox-size);
+  aspect-ratio: 1;
+  margin: 0;
+  border: 2px solid var(--cor-primaria);
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: #ffffff;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.tarefa-checkbox::before {
+  content: "";
+  inline-size: var(--checkbox-icon-size);
+  aspect-ratio: 1;
+  background-color: currentColor;
+  mask: var(--icon-check) no-repeat center / contain;
+  scale: 0;
+  transition: scale 150ms ease;
+}
+
+.tarefa-checkbox:checked {
+  background-color: var(--cor-sucesso);
+  border-color: var(--cor-sucesso);
+}
+
+.tarefa-checkbox:checked::before {
+  scale: 1;
+}
+
+.tarefa-checkbox:focus-visible {
+  outline: 2px solid var(--cor-primaria-hover);
+  outline-offset: 2px;
+}
+
+/* Texto da Tarefa (aplica tachado quando concluída) */
+.tarefa-texto {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--item-text);
+  text-decoration: var(--item-decoracao);
+  word-break: break-word;
+  transition: color 0.2s;
+}
+
+/* Ações e Badge de Status */
+.tarefa-acoes {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.status-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.status-badge.pendente {
+  background-color: var(--cor-pendente-fundo);
+  color: var(--cor-pendente);
+  border: 1px solid #fde68a;
+}
+
+.status-badge.concluida {
+  background-color: #dcfce7;
+  color: #15803d;
+  border: 1px solid #86efac;
+}
+
+/* Botão de Remover Tarefa */
+.btn-remover {
+  background-color: transparent;
+  color: var(--cor-texto-suave);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 0.4rem 0.65rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.btn-remover:hover {
+  background-color: #fef2f2;
+  color: var(--cor-perigo-hover);
+  border-color: #fecaca;
+}
+
+.btn-remover:focus-visible {
+  outline: 2px solid var(--cor-perigo);
+  outline-offset: 2px;
+}
+
+.estado-vazio {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--cor-texto-suave);
+  background-color: var(--cor-fundo-pagina);
+  border: 1px dashed var(--cor-borda);
+  border-radius: var(--raio-borda);
+  font-size: 0.95rem;
+}
+

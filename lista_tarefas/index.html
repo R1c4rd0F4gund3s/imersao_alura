@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lista de Tarefas — Imersão IA Alura (Desafio 3)</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app-container">
+    <!-- 1. Cabeçalho da Aplicação -->
+    <header class="app-header">
+      <div class="badge-desafio">🛸 Desafio 3 · Google Antigravity</div>
+      <h1>📋 Minha Lista de Tarefas</h1>
+      <p class="subtitulo">Organize suas atividades pendentes e acompanhe o que já foi concluído.</p>
+    </header>
+
+    <!-- 2. Painel de Resumo (Contadores) -->
+    <section class="painel-resumo" aria-label="Resumo das tarefas">
+      <div class="card-resumo">
+        <span class="resumo-numero" id="contador-total">0</span>
+        <span class="resumo-rotulo">Total</span>
+      </div>
+      <div class="card-resumo card-pendentes">
+        <span class="resumo-numero" id="contador-pendentes">0</span>
+        <span class="resumo-rotulo">⏳ Pendentes</span>
+      </div>
+      <div class="card-resumo card-concluidas">
+        <span class="resumo-numero" id="contador-concluidas">0</span>
+        <span class="resumo-rotulo">✅ Concluídas</span>
+      </div>
+    </section>
+
+    <!-- 3. Formulário para Adicionar Nova Tarefa -->
+    <section class="secao-formulario">
+      <form id="form-tarefa" novalidate>
+        <div class="grupo-input">
+          <label for="input-tarefa" class="sr-only">Digite uma nova atividade</label>
+          <input
+            type="text"
+            id="input-tarefa"
+            placeholder="Ex.: Estudar Python e testar no Antigravity..."
+            autocomplete="off"
+            required
+          />
+          <button type="submit" id="btn-adicionar" class="btn-primario">
+            <span class="icone-mais" aria-hidden="true">+</span> Adicionar
+          </button>
+        </div>
+        <p id="mensagem-erro" class="mensagem-erro" role="alert" hidden>
+          Por favor, digite uma descrição válida para a tarefa.
+        </p>
+      </form>
+    </section>
+
+    <!-- 4. Filtros de Visualização -->
+    <nav class="barra-filtros" aria-label="Filtrar tarefas por status">
+      <button type="button" class="btn-filtro ativo" data-filtro="todas">
+        Todas
+      </button>
+      <button type="button" class="btn-filtro" data-filtro="pendentes">
+        ⏳ Pendentes
+      </button>
+      <button type="button" class="btn-filtro" data-filtro="concluidas">
+        ✅ Concluídas
+      </button>
+    </nav>
+
+    <!-- 5. Lista Visual de Tarefas -->
+    <section class="secao-lista" aria-live="polite">
+      <ul id="lista-tarefas" class="lista-tarefas"></ul>
+
+      <!-- Estado vazio (exibido quando não há tarefas) -->
+      <div id="estado-vazio" class="estado-vazio">
+        <p>✨ Nenhuma tarefa por aqui! Adicione uma atividade acima para começar.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
